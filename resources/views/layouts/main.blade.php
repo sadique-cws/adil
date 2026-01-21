@@ -24,7 +24,7 @@
     <header>
         <div class="container nav-bar">
             <a href="{{ route('home') }}" class="logo">
-                <img src="{{ asset('logo.png') }}" alt="Adil Steels Logo" style="height: 50px; width: auto;">
+                <img src="{{ asset('logo.png') }}" alt="Adil Steels Logo" style="height: 60px; width: auto;">
             </a>
             <nav>
                 <ul class="nav-links">

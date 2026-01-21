@@ -23,3 +23,7 @@ Route::get('/contact', function () {
 })->name('contact');
 
 Route::post('/contact-submit', [App\Http\Controllers\EnquiryController::class, 'submit'])->name('contact.submit');
+
+// Image Upload Utility
+Route::get('/admin/upload', [App\Http\Controllers\ImageKitController::class, 'showUploadForm'])->name('image.upload');
+Route::post('/admin/upload', [App\Http\Controllers\ImageKitController::class, 'upload'])->name('image.upload.post');

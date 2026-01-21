@@ -282,18 +282,50 @@ const setupLightbox = () => {
     });
 };
 
+// Custom Video Player Logic
+const setupVideoPlayers = () => {
+    const wrappers = document.querySelectorAll('.video-wrapper');
+    
+    wrappers.forEach(wrapper => {
+        const video = wrapper.querySelector('video');
+        const playBtn = wrapper.querySelector('.play-button');
+
+        wrapper.addEventListener('click', () => {
+            if (video.paused) {
+                // Pause all other videos first (optional but good UX)
+                document.querySelectorAll('video').forEach(v => {
+                    if (v !== video && !v.paused) {
+                        v.pause();
+                        v.parentElement.classList.remove('playing');
+                        v.controls = false;
+                    }
+                });
+
+                video.play();
+                wrapper.classList.add('playing');
+                video.controls = true;
+            } else {
+                video.pause();
+                wrapper.classList.remove('playing');
+                video.controls = false;
+            }
+        });
+
+        video.addEventListener('ended', () => {
+            wrapper.classList.remove('playing');
+            video.controls = false;
+            // video.load(); // Reset to poster?
+        });
+    });
+};
+
 // Main Initialization
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize Quick Form if it exists
     setupQuickForm();
-    
-    // Initialize Modal
     setupModal();
-    
-    // Initialize Lightbox
     setupLightbox();
-    
-    // Also initialize validation for contact page form specifically if it exists
+    setupVideoPlayers(); // Initialize video players
+
     const contactForm = document.querySelector('.contact-page-form');
     if (contactForm) {
         setupValidation(contactForm);

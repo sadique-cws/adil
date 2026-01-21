@@ -117,37 +117,41 @@
             <h2>Video Showcase</h2>
         </div>
 
-        <div class="video-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+        <div class="video-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
             <!-- Video 1 -->
-            <div class="video-item" style="border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative;">
-                <video controls width="100%" height="auto" style="display: block; width: 100%; height: 100%; object-fit: cover;" poster="">
+            <div class="video-wrapper">
+                <video poster="" preload="metadata">
                     <source src="{{ asset('videos/1.mp4') }}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
+                <div class="play-button"><i class="fas fa-play"></i></div>
             </div>
 
             <!-- Video 2 -->
-            <div class="video-item" style="border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative;">
-                <video controls width="100%" height="auto" style="display: block; width: 100%; height: 100%; object-fit: cover;" poster="">
+            <div class="video-wrapper">
+                <video poster="" preload="metadata">
                     <source src="{{ asset('videos/2.mp4') }}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
+                <div class="play-button"><i class="fas fa-play"></i></div>
             </div>
 
             <!-- Video 3 -->
-            <div class="video-item" style="border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative;">
-                <video controls width="100%" height="auto" style="display: block; width: 100%; height: 100%; object-fit: cover;" poster="">
+            <div class="video-wrapper">
+                <video poster="" preload="metadata">
                     <source src="{{ asset('videos/3.mp4') }}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
+                <div class="play-button"><i class="fas fa-play"></i></div>
             </div>
 
             <!-- Video 4 -->
-            <div class="video-item" style="border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative;">
-                <video controls width="100%" height="auto" style="display: block; width: 100%; height: 100%; object-fit: cover;" poster="">
+            <div class="video-wrapper">
+                <video poster="" preload="metadata">
                     <source src="{{ asset('videos/4.mp4') }}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
+                <div class="play-button"><i class="fas fa-play"></i></div>
             </div>
         </div>
     </div>
