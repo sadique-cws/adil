@@ -21,5 +21,10 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        // Seed portfolio with sample projects
+        $this->call([
+            PortfolioSeeder::class,
+        ]);
     }
 }
