@@ -27,14 +27,9 @@ class ImageKitController extends Controller
     public function upload(Request $request)
     {
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:20480', // 20MB Max
-            'folder' => 'nullable|string',
-            'password' => 'required'
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:20480',
+            'caption' => 'required|string|max:255'
         ]);
-
-        if ($request->input('password') !== 'Dildar@123') {
-            return back()->with('error', 'Invalid Password! Access Denied.');
-        }
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -44,14 +39,22 @@ class ImageKitController extends Controller
                 $uploadFile = $this->imageKit->uploadFile([
                     'file' => base64_encode(file_get_contents($file->getRealPath())),
                     'fileName' => $file->getClientOriginalName(),
-                    'folder' => $request->input('folder', 'portfolio_uploads')
+                    'folder' => 'portfolio_uploads' // Enforce specific folder
                 ]);
 
                 if ($uploadFile->error) {
                     return back()->with('error', 'Upload Failed: ' . $uploadFile->error->message);
                 }
 
-                return back()->with('success', 'Image Uploaded Successfully!')
+                // Save to Database
+                \App\Models\Portfolio::create([
+                    'name' => $request->input('caption'), // Use user caption
+                    'url' => $uploadFile->result->url,
+                    'thumbnail_url' => $uploadFile->result->thumbnailUrl,
+                    'file_id' => $uploadFile->result->fileId
+                ]);
+
+                return back()->with('success', 'Image Uploaded & Saved to Database Successfully!')
                     ->with('url', $uploadFile->result->url)
                     ->with('thumbnail', $uploadFile->result->thumbnailUrl);
             } catch (\Exception $e) {

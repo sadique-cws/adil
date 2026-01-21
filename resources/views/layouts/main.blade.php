@@ -170,7 +170,13 @@
                         <li><a href="{{ route('services') }}">Services</a></li>
                         <li><a href="{{ route('portfolio') }}">Portfolio</a></li>
                         <li><a href="{{ route('contact') }}">Contact</a></li>
-                    </ul>
+                        <li>
+                            @auth
+                            <a href="{{ route('admin.dashboard') }}" style="color: var(--accent-color);">Admin Dashboard</a>
+                            @else
+                            <a href="{{ route('auth.google') }}" style="opacity: 0.5; font-size: 0.9em;">Admin Login</a>
+                            @endauth
+                        </li>
                 </div>
                 <div class="footer-contact">
                     <h3>Contact Us</h3>

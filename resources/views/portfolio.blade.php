@@ -19,75 +19,53 @@
 <section class="section">
     <div class="container">
 
+        {{-- Success/Error Messages --}}
+        @if(session('success'))
+        <div style="background: linear-gradient(135deg, #dcfce7, #d1fae5); border-left: 4px solid #22c55e; color: #166534; padding: 18px; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 4px 12px rgba(34, 197, 94, 0.15);">
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <i class="fas fa-check-circle" style="font-size: 22px; color: #22c55e;"></i>
+                <strong>{{ session('success') }}</strong>
+            </div>
+        </div>
+        @endif
+
+        @if(session('error'))
+        <div style="background: linear-gradient(135deg, #fee2e2, #fecaca); border-left: 4px solid #ef4444; color: #991b1b; padding: 18px; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);">
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <i class="fas fa-exclamation-triangle" style="font-size: 22px;"></i>
+                <strong>{{ session('error') }}</strong>
+            </div>
+        </div>
+        @endif
+
         <div class="gallery-grid">
-            <!-- Commercial / Office -->
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?q=80&w=800&auto=format&fit=crop" alt="Office Glass Sliders">
+            {{-- Dynamic Images from ImageKit --}}
+            @if(isset($images) && count($images) > 0)
+            @foreach($images as $img)
+            <div class="gallery-item" style="position: relative;">
+                <img src="{{ $img->url }}" alt="{{ $img->name }}" loading="lazy">
                 <div class="gallery-overlay">
-                    <h4>Office Glass Sliders</h4>
-                    <p>Commercial</p>
+                    <h4>{{ $img->name }}</h4>
+                    <p>Project</p>
                 </div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1577412647305-991150c7d163?q=80&w=800&auto=format&fit=crop" alt="Glass Partitions">
-                <div class="gallery-overlay">
-                    <h4>Glass Cabin Partitions</h4>
-                    <p>Commercial</p>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=800&auto=format&fit=crop" alt="Mall Facade">
-                <div class="gallery-overlay">
-                    <h4>Mall Glass Facade</h4>
-                    <p>Commercial</p>
-                </div>
-            </div>
 
-            <!-- Doors & Windows (PVC/Aluminum) -->
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1503708928676-1cb796a0891e?q=80&w=800&auto=format&fit=crop" alt="PVC Window Fitting">
-                <div class="gallery-overlay">
-                    <h4>PVC Window Fitting</h4>
-                    <p>Residential</p>
-                </div>
+                {{-- Delete Button (Admin Only) --}}
+                @auth
+                <form action="{{ route('admin.portfolio.delete', $img->id) }}" method="POST" style="position: absolute; top: 10px; right: 10px; z-index: 10;" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #ef4444, #dc2626); border: 2px solid white; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4); transition: all 0.3s ease;">
+                        <i class="fas fa-trash-alt" style="font-size: 16px;"></i>
+                    </button>
+                </form>
+                @endauth
             </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1489171078254-c3365d6e3dc3?q=80&w=800&auto=format&fit=crop" alt="Modern Door">
-                <div class="gallery-overlay">
-                    <h4>Aluminum Entrance Door</h4>
-                    <p>Residential</p>
-                </div>
+            @endforeach
+            @else
+            <div style="grid-column: 1 / -1; text-align: center; color: var(--text-secondary); padding: 50px;">
+                <p>No projects uploaded yet.</p>
             </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=800&auto=format&fit=crop" alt="Sliding Windows">
-                <div class="gallery-overlay">
-                    <h4>UPVC Sliding Windows</h4>
-                    <p>Residential</p>
-                </div>
-            </div>
-
-            <!-- Custom / Heavy Work -->
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=800&auto=format&fit=crop" alt="Steel Staircase">
-                <div class="gallery-overlay">
-                    <h4>Steel Staircase</h4>
-                    <p>Custom Work</p>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1595846723223-96b42b6a7a0b?q=80&w=800&auto=format&fit=crop" alt="Glass Railing">
-                <div class="gallery-overlay">
-                    <h4>Balcony Glass Railing</h4>
-                    <p>Residential</p>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1615529182904-14819c35db37?q=80&w=800&auto=format&fit=crop" alt="Decorative Gate">
-                <div class="gallery-overlay">
-                    <h4>Decorative Steel Gate</h4>
-                    <p>Custom Work</p>
-                </div>
-            </div>
+            @endif
         </div>
     </div>
 </section>
@@ -108,6 +86,9 @@
                     Your browser does not support the video tag.
                 </video>
                 <div class="play-button"><i class="fas fa-play"></i></div>
+                <div class="video-progress-container">
+                    <div class="video-progress-filled"></div>
+                </div>
             </div>
 
             <!-- Video 2 -->
@@ -117,6 +98,9 @@
                     Your browser does not support the video tag.
                 </video>
                 <div class="play-button"><i class="fas fa-play"></i></div>
+                <div class="video-progress-container">
+                    <div class="video-progress-filled"></div>
+                </div>
             </div>
 
             <!-- Video 3 -->
@@ -126,6 +110,9 @@
                     Your browser does not support the video tag.
                 </video>
                 <div class="play-button"><i class="fas fa-play"></i></div>
+                <div class="video-progress-container">
+                    <div class="video-progress-filled"></div>
+                </div>
             </div>
 
             <!-- Video 4 -->
@@ -135,6 +122,9 @@
                     Your browser does not support the video tag.
                 </video>
                 <div class="play-button"><i class="fas fa-play"></i></div>
+                <div class="video-progress-container">
+                    <div class="video-progress-filled"></div>
+                </div>
             </div>
         </div>
     </div>

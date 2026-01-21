@@ -72,7 +72,8 @@
             <!-- Contact Form -->
             <div class="contact-form" style="background: var(--secondary-glass); padding: 40px; border-radius: 12px; border: 1px solid var(--glass-border); backdrop-filter: blur(20px);">
                 <h2 style="color: var(--text-primary); margin-bottom: 30px; font-size: 1.8rem;">Send a Message</h2>
-                <form action="#" method="POST" class="contact-page-form">
+                <form action="{{ route('contact.submit') }}" method="POST" class="contact-page-form">
+                    @csrf
                     <div class="form-group">
                         <label for="name">Your Name</label>
                         <input type="text" id="name" name="name" placeholder="Full Name">

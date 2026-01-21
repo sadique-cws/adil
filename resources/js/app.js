@@ -139,6 +139,12 @@ function setupValidation(formElement) {
         }
     }
 
+    // Prevent duplicate event listeners
+    if (formElement.dataset.validationAttached === 'true') {
+        return; // Already has validation attached
+    }
+    formElement.dataset.validationAttached = 'true';
+
     // Only add submit listener if one doesn't exist? 
     // Actually, simple cloneNode or flag is safer to avoid duplicates if called multiple times,
     // but here we call it once per form.
@@ -190,19 +196,20 @@ function setupValidation(formElement) {
                 const result = await response.json();
 
                 if (response.ok) {
-                     submitBtn.innerHTML = '<i class="fas fa-check"></i> Sent!';
-                     submitBtn.style.background = '#22c55e';
-                     formElement.reset();
-                     inputs.forEach(i => i.classList.remove('is-valid'));
+                     // Replace form with success message
+                     formElement.innerHTML = `
+                        <div class="success-message" style="text-align: center; padding: 40px 20px; animation: fadeIn 0.5s ease; color: var(--text-primary);">
+                            <div style="width: 70px; height: 70px; background: rgba(34, 197, 94, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                                <i class="fas fa-check" style="font-size: 35px; color: #22c55e;"></i>
+                            </div>
+                            <h3 style="margin-bottom: 10px; font-size: 24px;">Thank You!</h3>
+                            <p style="color: var(--text-secondary); margin-bottom: 0;">Your enquiry has been sent successfully.<br>We will get back to you shortly.</p>
+                        </div>
+                     `;
                      
-                     setTimeout(() => {
-                        submitBtn.innerHTML = btnContent;
-                        submitBtn.style.background = '';
-                        submitBtn.style.opacity = '0.7';
-                        if(formElement.classList.contains('quote-form')) {
-                            document.querySelector('.close-modal').click();
-                        }
-                    }, 3000);
+                     // If inside a modal, maybe close it after 3 seconds?
+                     // Optional: user can manually close.
+
                 } else {
                      submitBtn.innerHTML = 'Failed. Try Again.';
                      submitBtn.style.background = '#ef4444';
@@ -283,38 +290,82 @@ const setupLightbox = () => {
 };
 
 // Custom Video Player Logic
+// Custom Video Player Logic
 const setupVideoPlayers = () => {
     const wrappers = document.querySelectorAll('.video-wrapper');
     
     wrappers.forEach(wrapper => {
         const video = wrapper.querySelector('video');
         const playBtn = wrapper.querySelector('.play-button');
+        const progressContainer = wrapper.querySelector('.video-progress-container');
+        const progressBar = wrapper.querySelector('.video-progress-filled');
 
-        wrapper.addEventListener('click', () => {
-            if (video.paused) {
-                // Pause all other videos first (optional but good UX)
-                document.querySelectorAll('video').forEach(v => {
-                    if (v !== video && !v.paused) {
-                        v.pause();
-                        v.parentElement.classList.remove('playing');
-                        v.controls = false;
-                    }
-                });
+        if (!video || !playBtn) return;
 
-                video.play();
-                wrapper.classList.add('playing');
-                video.controls = true;
-            } else {
-                video.pause();
+        // Ensure native controls are disabled to show our custom ones only
+        video.controls = false;
+
+        const togglePlay = async (e) => {
+            try {
+                if (video.paused) {
+                    // Pause all other videos
+                    document.querySelectorAll('video').forEach(v => {
+                        if (v !== video && !v.paused) {
+                            v.pause();
+                            v.parentElement.classList.remove('playing');
+                            // v.controls = false; // We use custom controls now
+                        }
+                    });
+
+                    await video.play();
+                    wrapper.classList.add('playing');
+                } else {
+                    video.pause();
+                    wrapper.classList.remove('playing');
+                }
+            } catch (err) {
+                console.error("Video playback failed:", err);
                 wrapper.classList.remove('playing');
-                video.controls = false;
+            }
+        };
+
+        // Click on wrapper toggles play (excluding progress bar)
+        wrapper.addEventListener('click', (e) => {
+            // Prevent if clicking on progress bar
+            if (e.target.closest('.video-progress-container')) return;
+            togglePlay(e);
+        });
+
+        // Play button specific
+        playBtn.addEventListener('click', (e) => {
+             e.stopPropagation(); 
+             togglePlay(e);
+        });
+
+        // Update Progress Bar
+        video.addEventListener('timeupdate', () => {
+            if (video.duration) {
+                const percent = (video.currentTime / video.duration) * 100;
+                if(progressBar) progressBar.style.width = `${percent}%`;
             }
         });
 
+        // Seek Functionality
+        if (progressContainer) {
+            progressContainer.addEventListener('click', (e) => {
+                e.stopPropagation(); // Don't toggle play
+                const rect = progressContainer.getBoundingClientRect();
+                const pos = (e.clientX - rect.left) / rect.width;
+                if (video.duration) {
+                    video.currentTime = pos * video.duration;
+                }
+            });
+        }
+
         video.addEventListener('ended', () => {
             wrapper.classList.remove('playing');
-            video.controls = false;
-            // video.load(); // Reset to poster?
+            video.currentTime = 0;
+            if(progressBar) progressBar.style.width = '0%';
         });
     });
 };
