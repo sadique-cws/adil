@@ -58,47 +58,49 @@
             <h2>Meet The Team</h2>
         </div>
         <div class="team-grid">
+            <!-- Team Member 1: Hasim -->
             <div class="team-card">
                 <div class="team-img">
-                    <img src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=800&auto=format&fit=crop" alt="Expert Welders">
+                    <img src="{{ asset('team/hasim.png') }}" alt="Hasim">
                 </div>
-                <h3>Expert Welders</h3>
-                <p>Specialists in heavy structurals</p>
+                <h3>Hasim</h3>
+                <p>Senior Fabricator</p>
             </div>
+
+            <!-- Team Member 2: Mujib -->
             <div class="team-card">
                 <div class="team-img">
-                    <img src="https://images.unsplash.com/photo-1542385151-efd9000785a0?q=80&w=800&auto=format&fit=crop" alt="Glass Fitters">
+                    <img src="{{ asset('team/mujib.png') }}" alt="Mujib">
                 </div>
-                <h3>Glass Fitters</h3>
-                <p>Precision finishing team</p>
+                <h3>Mujib</h3>
+                <p>Glass Installation Expert</p>
             </div>
+
+            <!-- Team Member 3: Raza Ali -->
             <div class="team-card">
                 <div class="team-img">
-                    <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=800&auto=format&fit=crop" alt="Fabricators">
+                    <img src="{{ asset('team/raza ali.png') }}" alt="Raza Ali">
                 </div>
-                <h3>Aluminum Fabricators</h3>
-                <p>Aluminum & PVC Experts</p>
+                <h3>Raza Ali</h3>
+                <p>Welding Specialist</p>
             </div>
+
+            <!-- Team Member 4: Sameer -->
             <div class="team-card">
                 <div class="team-img">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop" alt="Project Manager">
+                    <img src="{{ asset('team/sameer.png') }}" alt="Sameer">
                 </div>
-                <h3>Project Manager</h3>
-                <p>Coordinating excellence</p>
+                <h3>Sameer</h3>
+                <p>Project Manager</p>
             </div>
+
+            <!-- Team Member 5: Suhaan -->
             <div class="team-card">
                 <div class="team-img">
-                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop" alt="Steel Fabricators">
+                    <img src="{{ asset('team/suhaan.png') }}" alt="Suhaan">
                 </div>
-                <h3>Steel Fabricators</h3>
-                <p>Iron & steel work specialists</p>
-            </div>
-            <div class="team-card">
-                <div class="team-img">
-                    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800&auto=format&fit=crop" alt="Quality Inspector">
-                </div>
-                <h3>Quality Inspector</h3>
-                <p>Ensuring perfection</p>
+                <h3>Suhaan</h3>
+                <p>Quality Inspector</p>
             </div>
         </div>
     </div>
