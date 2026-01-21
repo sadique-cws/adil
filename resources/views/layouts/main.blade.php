@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Adil Steels & Glasses | Premium Fabrication Services')</title>
 
     <!-- Fonts -->
@@ -22,7 +23,9 @@
     <!-- Header -->
     <header>
         <div class="container nav-bar">
-            <a href="{{ route('home') }}" class="logo">Adil <span>Steels</span></a>
+            <a href="{{ route('home') }}" class="logo">
+                <img src="{{ asset('logo.png') }}" alt="Adil Steels Logo" style="height: 50px; width: auto;">
+            </a>
             <nav>
                 <ul class="nav-links">
                     <li><a href="{{ route('home') }}" class="{{ Route::currentRouteName() == 'home' ? 'active' : '' }}">Home</a></li>
@@ -32,13 +35,124 @@
                     <li><a href="{{ route('contact') }}" class="{{ Route::currentRouteName() == 'contact' ? 'active' : '' }}">Contact</a></li>
                 </ul>
             </nav>
-            <a href="{{ route('contact') }}" class="cta-btn">Get a Quote</a>
+            <a href="javascript:void(0)" id="openQuoteModal" class="cta-btn">Get a Quote</a>
         </div>
     </header>
 
     <main>
         @yield('content')
     </main>
+
+    <!-- Quote Modal -->
+    <div id="quoteModal" class="modal-overlay">
+        <div class="glass-enquiry-card modal-content" style="max-width: 900px; width: 90%; margin: 0; position: relative; animation: slideUp 0.4s ease;">
+            <button class="close-modal">&times;</button>
+            <div class="enquiry-text">
+                <h3>Request a Quote</h3>
+                <p>Tell us about your project requirements and we'll get back to you with a competitive price.</p>
+            </div>
+            <form action="#" class="quick-form quote-form">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" placeholder="Your Name" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-phone"></i>
+                    <input type="tel" placeholder="Mobile Number" required>
+                </div>
+                <div class="input-group" style="flex-basis: 100%;">
+                    <i class="fas fa-tools"></i>
+                    <select required>
+                        <option value="" disabled selected>Service Needed</option>
+                        <option value="structure_glazing">Structure Glazing</option>
+                        <option value="tuffen">12mm Tuffen Partition</option>
+                        <option value="aluminum_partition">Aluminium Partition</option>
+                        <option value="acp">ACP Glazing / Elevation</option>
+                        <option value="glass">Glass Glazing Work</option>
+                        <option value="steel">Steel Railing & Works</option>
+                        <option value="iron">Iron Gates & Grills</option>
+                        <option value="luxury">Luxury Profile / Interiors</option>
+                        <option value="kitchen">Modular Kitchen</option>
+                        <option value="upvc_window">UPVC Windows & Doors</option>
+                        <option value="domal">Domal Windows & Doors</option>
+                        <option value="pvc_door">PVC Door</option>
+                        <option value="upvc_door">UPVC Door</option>
+                        <option value="wpc_door">WPC Door</option>
+                        <option value="flush_door">Flush Door</option>
+                        <option value="luxury_door">Luxury Designer Door</option>
+                        <option value="bathroom_glass">Bathroom Glass Work</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="input-group" style="flex-basis: 100%;">
+                    <i class="fas fa-comment-alt"></i>
+                    <input type="text" placeholder="Brief Description (Optional)" style="border-radius: 20px;">
+                </div>
+                <button type="submit" class="btn-submit" style="width: 100%; justify-content: center;">
+                    <span>Send Request</span> <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    @if(Route::currentRouteName() != 'contact')
+    <!-- Quick Business Enquiry Section -->
+    <section class="quick-enquiry-section">
+        <div class="container">
+            <div class="glass-enquiry-card">
+                <div class="enquiry-text">
+                    <h3>Fast Business Enquiry</h3>
+                    <p>Looking for a quote? Share your details for a quick callback.</p>
+                </div>
+                <form action="#" class="quick-form">
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-phone"></i>
+                        <input type="tel" placeholder="Mobile Number" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-tools"></i>
+                        <select>
+                            <option value="" disabled selected>Service Needed</option>
+                            <option value="structure_glazing">Structure Glazing</option>
+                            <option value="tuffen">12mm Tuffen Partition</option>
+                            <option value="aluminum_partition">Aluminium Partition</option>
+                            <option value="acp">ACP Glazing / Elevation</option>
+                            <option value="glass">Glass Glazing Work</option>
+                            <option value="steel">Steel Railing & Works</option>
+                            <option value="iron">Iron Gates & Grills</option>
+                            <option value="luxury">Luxury Profile / Interiors</option>
+                            <option value="kitchen">Modular Kitchen</option>
+                            <option value="upvc_window">UPVC Windows & Doors</option>
+                            <option value="domal">Domal Windows & Doors</option>
+                            <option value="pvc_door">PVC Door</option>
+                            <option value="upvc_door">UPVC Door</option>
+                            <option value="wpc_door">WPC Door</option>
+                            <option value="flush_door">Flush Door</option>
+                            <option value="luxury_door">Luxury Designer Door</option>
+                            <option value="bathroom_glass">Bathroom Glass Work</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-submit">
+                        <span>Submit</span> <i class="fas fa-paper-plane"></i>
+                    </button>
+                    <!-- Success/Loading state placeholders can be added here -->
+                </form>
+            </div>
+        </div>
+    </section>
+    @endif
+
+    <!-- Lightbox for Gallery -->
+    <div id="lightbox" class="lightbox-overlay">
+        <span class="lightbox-close">&times;</span>
+        <button class="lightbox-prev"><i class="fas fa-chevron-left"></i></button>
+        <img id="lightbox-img" src="" alt="Fullscreen Image">
+        <button class="lightbox-next"><i class="fas fa-chevron-right"></i></button>
+    </div>
 
     <!-- Footer -->
     <footer id="contact" class="footer">
@@ -61,18 +175,24 @@
                 <div class="footer-contact">
                     <h3>Contact Us</h3>
                     <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> Shop No. 5, Commercial Area, Main Market</li>
-                        <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Naka Chowk, Purnia City,<br>Bihar, India</li>
+                        <li><i class="fas fa-phone"></i> +91 82350 89500</li>
+                        <li><i class="fas fa-phone"></i> +91 94300 39254</li>
                         <li><i class="fas fa-envelope"></i> contact@adilsteels.com</li>
                         <li><i class="fas fa-clock"></i> Mon - Sat: 9:00 AM - 8:00 PM</li>
                     </ul>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2026 Adil Steels & Glasses. All Rights Reserved.</p>
+                <p>&copy; {{ date('Y') }} Adil Steels & Glasses. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/918235089500" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 </body>
 
 </html>
