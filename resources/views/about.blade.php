@@ -59,12 +59,20 @@
         </div>
         <div class="team-grid">
             <!-- Team Member 1: Hasim -->
+            <!-- Team Member 4: Sameer -->
+            <div class="team-card">
+                <div class="team-img">
+                    <img src="{{ asset('team/sameer.png') }}" alt="Sameer">
+                </div>
+                <h3>Sameer</h3>
+                <p>Welding Specialist</p>
+            </div>
             <div class="team-card">
                 <div class="team-img">
                     <img src="{{ asset('team/hasim.png') }}" alt="Hasim">
                 </div>
                 <h3>Hasim</h3>
-                <p>Senior Fabricator</p>
+                <p>Glass Installation Expert</p>
             </div>
 
             <!-- Team Member 2: Mujib -->
@@ -82,17 +90,10 @@
                     <img src="{{ asset('team/raza ali.png') }}" alt="Raza Ali">
                 </div>
                 <h3>Raza Ali</h3>
-                <p>Welding Specialist</p>
+                <p>Glass Installation Expert</p>
             </div>
 
-            <!-- Team Member 4: Sameer -->
-            <div class="team-card">
-                <div class="team-img">
-                    <img src="{{ asset('team/sameer.png') }}" alt="Sameer">
-                </div>
-                <h3>Sameer</h3>
-                <p>Project Manager</p>
-            </div>
+            
 
             <!-- Team Member 5: Suhaan -->
             <div class="team-card">
@@ -100,7 +101,7 @@
                     <img src="{{ asset('team/suhaan.png') }}" alt="Suhaan">
                 </div>
                 <h3>Suhaan</h3>
-                <p>Quality Inspector</p>
+                <p>Glass Installation Expert</p>
             </div>
         </div>
     </div>
