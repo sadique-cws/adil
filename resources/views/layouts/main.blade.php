@@ -27,15 +27,22 @@
                 <img src="{{ asset('logo.png') }}" alt="Adil Steels Logo" style="height: 60px; width: auto;">
             </a>
             <nav>
-                <ul class="nav-links">
+                <ul class="nav-links" id="navLinks">
                     <li><a href="{{ route('home') }}" class="{{ Route::currentRouteName() == 'home' ? 'active' : '' }}">Home</a></li>
                     <li><a href="{{ route('about') }}" class="{{ Route::currentRouteName() == 'about' ? 'active' : '' }}">About</a></li>
                     <li><a href="{{ route('services') }}" class="{{ Route::currentRouteName() == 'services' ? 'active' : '' }}">Services</a></li>
                     <li><a href="{{ route('portfolio') }}" class="{{ Route::currentRouteName() == 'portfolio' ? 'active' : '' }}">Portfolio</a></li>
                     <li><a href="{{ route('contact') }}" class="{{ Route::currentRouteName() == 'contact' ? 'active' : '' }}">Contact</a></li>
+                    <li class="mobile-cta"><a href="javascript:void(0)" id="mobileQuoteBtn" class="cta-btn">Get a Quote</a></li>
                 </ul>
             </nav>
-            <a href="javascript:void(0)" id="openQuoteModal" class="cta-btn">Get a Quote</a>
+            <a href="javascript:void(0)" id="openQuoteModal" class="cta-btn desktop-cta">Get a Quote</a>
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
         </div>
     </header>
 
