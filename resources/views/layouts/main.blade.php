@@ -6,6 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Adil Steels & Glasses | Premium Fabrication Services')</title>
+    <meta name="description" content="@yield('meta_description', 'Adil Steels & Glasses - Premium fabrication services in Purnia, Bihar. Specializing in structure glazing, modular kitchen, UPVC windows & doors, steel railing, iron gates, and glass work.')">
+    <meta name="keywords" content="@yield('meta_keywords', 'structure glazing, modular kitchen, UPVC windows, steel railing, iron gates, glass work, fabrication, Purnia, Bihar, aluminium partition, ACP glazing')">
+    <meta name="author" content="Adil Steels & Glasses">
+    <link rel="canonical" href="{{ url()->current() }}">
+    <meta name="theme-color" content="#0284c7">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="@yield('title', 'Adil Steels & Glasses | Premium Fabrication Services')">
+    <meta property="og:description" content="@yield('meta_description', 'Adil Steels & Glasses - Premium fabrication services in Purnia, Bihar.')">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="{{ asset('logo.png') }}">
+    <meta property="og:site_name" content="Adil Steels & Glasses">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="@yield('title', 'Adil Steels & Glasses')">
+    <meta name="twitter:description" content="@yield('meta_description', 'Premium fabrication services in Purnia, Bihar.')">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,14 +44,13 @@
             <a href="{{ route('home') }}" class="logo">
                 <img src="{{ asset('logo.png') }}" alt="Adil Steels Logo" style="height: 60px; width: auto;">
             </a>
-            <nav>
-                <ul class="nav-links" id="navLinks">
+            <nav class="desktop-nav">
+                <ul class="nav-links">
                     <li><a href="{{ route('home') }}" class="{{ Route::currentRouteName() == 'home' ? 'active' : '' }}">Home</a></li>
                     <li><a href="{{ route('about') }}" class="{{ Route::currentRouteName() == 'about' ? 'active' : '' }}">About</a></li>
                     <li><a href="{{ route('services') }}" class="{{ Route::currentRouteName() == 'services' ? 'active' : '' }}">Services</a></li>
                     <li><a href="{{ route('portfolio') }}" class="{{ Route::currentRouteName() == 'portfolio' ? 'active' : '' }}">Portfolio</a></li>
                     <li><a href="{{ route('contact') }}" class="{{ Route::currentRouteName() == 'contact' ? 'active' : '' }}">Contact</a></li>
-                    <li class="mobile-cta"><a href="javascript:void(0)" id="mobileQuoteBtn" class="cta-btn">Get a Quote</a></li>
                 </ul>
             </nav>
             <a href="javascript:void(0)" id="openQuoteModal" class="cta-btn desktop-cta">Get a Quote</a>
@@ -45,6 +62,18 @@
             </button>
         </div>
     </header>
+
+    <!-- Mobile Navigation Overlay (outside header to avoid backdrop-filter stacking context) -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay">
+        <ul class="nav-links" id="navLinks">
+            <li><a href="{{ route('home') }}" class="{{ Route::currentRouteName() == 'home' ? 'active' : '' }}">Home</a></li>
+            <li><a href="{{ route('about') }}" class="{{ Route::currentRouteName() == 'about' ? 'active' : '' }}">About</a></li>
+            <li><a href="{{ route('services') }}" class="{{ Route::currentRouteName() == 'services' ? 'active' : '' }}">Services</a></li>
+            <li><a href="{{ route('portfolio') }}" class="{{ Route::currentRouteName() == 'portfolio' ? 'active' : '' }}">Portfolio</a></li>
+            <li><a href="{{ route('contact') }}" class="{{ Route::currentRouteName() == 'contact' ? 'active' : '' }}">Contact</a></li>
+            <li class="mobile-cta"><a href="javascript:void(0)" id="mobileQuoteBtn" class="cta-btn">Get a Quote</a></li>
+        </ul>
+    </div>
 
     <main>
         @yield('content')

@@ -1,6 +1,8 @@
 @extends('layouts.main')
 
-@section('title', 'Our Services | Adil Steels & Glasses')
+@section('title', 'Our Services | Adil Steels & Glasses - Complete Fabrication Solutions')
+@section('meta_description', 'Explore 17+ fabrication services by Adil Steels & Glasses: structure glazing, UPVC windows, modular kitchen, steel railing, iron gates, ACP glazing, glass partitions, and more in Purnia, Bihar.')
+@section('meta_keywords', 'fabrication services Purnia, structure glazing, UPVC windows, modular kitchen, steel railing, iron gate, ACP glazing, glass partition, PVC door, flush door')
 
 @section('content')
 <!-- Page Header -->

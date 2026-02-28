@@ -5,24 +5,23 @@ import "./bootstrap";
 // ========================================
 document.addEventListener("DOMContentLoaded", () => {
     const hamburger = document.getElementById("hamburger");
-    const navLinks = document.getElementById("navLinks");
+    const mobileNavOverlay = document.getElementById("mobileNavOverlay");
     const mobileQuoteBtn = document.getElementById("mobileQuoteBtn");
 
-    if (hamburger && navLinks) {
+    if (hamburger && mobileNavOverlay) {
         hamburger.addEventListener("click", () => {
             hamburger.classList.toggle("active");
-            navLinks.classList.toggle("active");
-            // Prevent body scroll when menu is open
-            document.body.style.overflow = navLinks.classList.contains("active")
+            mobileNavOverlay.classList.toggle("active");
+            document.body.style.overflow = mobileNavOverlay.classList.contains("active")
                 ? "hidden"
                 : "";
         });
 
         // Close menu when a nav link is clicked
-        navLinks.querySelectorAll("a:not(.cta-btn)").forEach((link) => {
+        mobileNavOverlay.querySelectorAll("a:not(.cta-btn)").forEach((link) => {
             link.addEventListener("click", () => {
                 hamburger.classList.remove("active");
-                navLinks.classList.remove("active");
+                mobileNavOverlay.classList.remove("active");
                 document.body.style.overflow = "";
             });
         });
@@ -31,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (mobileQuoteBtn) {
             mobileQuoteBtn.addEventListener("click", () => {
                 hamburger.classList.remove("active");
-                navLinks.classList.remove("active");
+                mobileNavOverlay.classList.remove("active");
                 document.body.style.overflow = "";
                 const quoteModal = document.getElementById("quoteModal");
                 if (quoteModal) {

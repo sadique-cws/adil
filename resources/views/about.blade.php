@@ -1,7 +1,8 @@
 @extends('layouts.main')
 
-@section('title', 'About Us | Adil Steels & Glasses')
-
+@section('title', 'About Us | Adil Steels & Glasses - 15+ Years of Fabrication Excellence')
+@section('meta_description', 'Learn about Adil Steels & Glasses, a premier fabrication company in Purnia, Bihar with 15+ years of experience in aluminum, glass, steel, and PVC solutions for residential and commercial projects.')
+@section('meta_keywords', 'about Adil Steels, fabrication company Purnia, glass steel work Bihar, 15 years experience, team')
 @section('content')
 <!-- Page Header -->
 <div style="position: relative; padding: 180px 0 100px; text-align: center; overflow: hidden;">
@@ -93,7 +94,7 @@
                 <p>Glass Installation Expert</p>
             </div>
 
-            
+
 
             <!-- Team Member 5: Suhaan -->
             <div class="team-card">

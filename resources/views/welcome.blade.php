@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('title', 'Adil Steels & Glasses | Premium Glass, Steel & Aluminum Fabrication in Purnia')
+@section('meta_description', 'Adil Steels & Glasses offers premium structure glazing, modular kitchen, UPVC windows & doors, steel railings, iron gates, and glass work services in Purnia, Bihar. 15+ years of excellence.')
+@section('meta_keywords', 'Adil Steels Purnia, glass fabrication Bihar, structure glazing, modular kitchen Purnia, UPVC windows doors, steel railing, iron gate, aluminium work')
+
 @section('content')
 <!-- Hero Section -->
 <section id="hero" class="hero">

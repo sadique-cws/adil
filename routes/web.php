@@ -49,3 +49,28 @@ Route::middleware(['auth', 'admin.access'])->prefix('admin')->name('admin.')->gr
     // Portfolio Management
     Route::delete('/portfolio/{id}', [App\Http\Controllers\PortfolioController::class, 'delete'])->name('portfolio.delete');
 });
+
+// --- Sitemap ---
+Route::get('/sitemap.xml', function () {
+    $urls = [
+        ['loc' => url('/'), 'priority' => '1.0', 'changefreq' => 'weekly'],
+        ['loc' => url('/about'), 'priority' => '0.8', 'changefreq' => 'monthly'],
+        ['loc' => url('/services'), 'priority' => '0.9', 'changefreq' => 'monthly'],
+        ['loc' => url('/portfolio'), 'priority' => '0.8', 'changefreq' => 'weekly'],
+        ['loc' => url('/contact'), 'priority' => '0.7', 'changefreq' => 'monthly'],
+    ];
+
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>';
+    $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+    foreach ($urls as $url) {
+        $xml .= '<url>';
+        $xml .= '<loc>' . $url['loc'] . '</loc>';
+        $xml .= '<lastmod>' . now()->toDateString() . '</lastmod>';
+        $xml .= '<changefreq>' . $url['changefreq'] . '</changefreq>';
+        $xml .= '<priority>' . $url['priority'] . '</priority>';
+        $xml .= '</url>';
+    }
+    $xml .= '</urlset>';
+
+    return response($xml, 200)->header('Content-Type', 'application/xml');
+});

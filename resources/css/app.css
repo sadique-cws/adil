@@ -755,6 +755,11 @@ select:focus {
     display: none;
 }
 
+/* Mobile Nav Overlay - hidden by default */
+.mobile-nav-overlay {
+    display: none;
+}
+
 /* ========================================
    RESPONSIVE - TABLET (max-width: 1024px)
    ======================================== */
@@ -808,63 +813,61 @@ select:focus {
    ======================================== */
 @media (max-width: 768px) {
     /* --- Mobile Navigation --- */
-    .hamburger {
-        display: flex;
-    }
-    .desktop-cta {
-        display: none;
-    }
-    .mobile-cta {
-        display: block !important;
-    }
+    .hamburger { display: flex; z-index: 9999; }
+    .desktop-cta { display: none !important; }
+    .desktop-nav { display: none !important; }
 
-    .nav-links {
+    /* Mobile Nav Overlay (outside header) */
+    .mobile-nav-overlay {
         display: none;
         position: fixed;
         top: 0;
         left: 0;
-        right: 0;
-        bottom: 0;
+        width: 100vw;
+        height: 100vh;
         background: #ffffff;
+        z-index: 9998;
+        padding: 100px 40px 40px;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 0;
-        z-index: 999;
-        padding: 100px 40px 40px;
     }
 
-    .nav-links.active {
+    .mobile-nav-overlay.active {
         display: flex;
     }
 
-    .nav-links li {
+    .mobile-nav-overlay .nav-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        width: 100%;
+    }
+
+    .mobile-nav-overlay .nav-links li {
         width: 100%;
         text-align: center;
     }
 
-    .nav-links a {
+    .mobile-nav-overlay .nav-links a {
         display: block;
         padding: 18px 0;
         font-size: 1.3rem;
         font-weight: 600;
         color: var(--text-primary);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        border-bottom: 1px solid rgba(0,0,0,0.06);
     }
 
-    .nav-links a::after {
-        display: none;
-    }
+    .mobile-nav-overlay .nav-links a::after { display: none; }
+    .mobile-nav-overlay .nav-links a.active { color: var(--accent-color); }
 
-    .nav-links a.active {
-        color: var(--accent-color);
-    }
-
-    .mobile-cta {
+    .mobile-nav-overlay .mobile-cta {
+        display: block !important;
         margin-top: 20px;
     }
 
-    .mobile-cta .cta-btn {
+    .mobile-nav-overlay .mobile-cta .cta-btn {
         display: inline-block;
         width: 100%;
         text-align: center;

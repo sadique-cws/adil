@@ -1,6 +1,8 @@
 @extends('layouts.main')
 
-@section('title', 'Contact Us | Adil Steels & Glasses')
+@section('title', 'Contact Us | Adil Steels & Glasses - Get a Free Quote')
+@section('meta_description', 'Contact Adil Steels & Glasses for free quotes and consultations. Visit us at Naka Chowk, Purnia City, Bihar. Call +91 82350 89500 or +91 94300 39254.')
+@section('meta_keywords', 'contact Adil Steels, fabrication quote Purnia, glass work contact, phone number Adil Steels, Naka Chowk Purnia')
 
 @section('content')
 <!-- Page Header -->

@@ -1,6 +1,8 @@
 @extends('layouts.main')
 
-@section('title', 'Our Portfolio | Adil Steels & Glasses')
+@section('title', 'Our Portfolio | Adil Steels & Glasses - Completed Projects Gallery')
+@section('meta_description', 'Browse our portfolio of completed fabrication projects including structure glazing, modular kitchens, UPVC installations, steel railings, and more by Adil Steels & Glasses in Purnia, Bihar.')
+@section('meta_keywords', 'portfolio Adil Steels, completed projects, glass work gallery, fabrication projects Bihar, modular kitchen gallery')
 
 @section('content')
 <!-- Page Header -->
