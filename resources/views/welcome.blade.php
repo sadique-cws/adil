@@ -58,7 +58,7 @@
             <!-- Featured Service 3: UPVC Solutions -->
             <div class="service-card" style="padding: 0; overflow: hidden; border-radius: 20px; transition: all 0.4s ease;">
                 <div style="height: 200px; overflow: hidden; position: relative;">
-                    <img src="https://images.unsplash.com/photo-1503708928676-1cb796a0891e?q=80&w=800&auto=format&fit=crop" alt="UPVC Windows" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
+                    <img src="{{ asset('photos/image.png') }}" alt="UPVC Windows" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
                     <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 100%);"></div>
                 </div>
                 <div style="padding: 30px;">
